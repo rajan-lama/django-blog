@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from blog import views as blog_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('username/<str:username>/', blog_views.home, name='username'),
+    path('post/<int:single>/', blog_views.single, name='single'),
+    path('/<str:page>/', blog_views.page, name='page'),
+
+    path("", blog_views.frontpage),
+    # path("", blog_views.home),
 ]
