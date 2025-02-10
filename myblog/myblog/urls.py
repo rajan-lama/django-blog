@@ -20,8 +20,14 @@ from blog import views as blog_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('username/<str:username>/', blog_views.home, name='username'),
+    # path('username/<str:username>/', blog_views.home, name='username'),
     path('post/<int:single>/', blog_views.single, name='single'),
+    path('about', blog_views.about),
+    path('services', blog_views.services),
+    path('portfolio', blog_views.portfolio),
+    path('gallery', blog_views.gallery),
+    path('blog', blog_views.home),
+    path('contact', blog_views.contact),
     path('/<str:page>/', blog_views.page, name='page'),
 
     path("", blog_views.frontpage),

@@ -17,18 +17,32 @@ def frontpage(request):
     return render(request, 'pages/front-page.html')
 
 
-def home(request, username):
+# def home(request, username):
+
+#     posts = Post.objects.all()
+#     paginate = Paginator(posts, 5)
+#     page = request.GET.get('page')
+
+#     context = {
+#         'currentUser': username,
+#         'posts': posts
+#     }
+
+#     return render(request, 'pages/home.html', context)
+
+def home(request):
 
     posts = Post.objects.all()
     paginate = Paginator(posts, 5)
     page = request.GET.get('page')
 
     context = {
-        'currentUser': username,
+        # 'currentUser': username,
         'posts': posts
     }
 
     return render(request, 'pages/home.html', context)
+
 
 
 def single(request, single):
@@ -40,9 +54,49 @@ def single(request, single):
     return render(request, 'pages/single.html', context)
 
 def page(request, page):
-    page = Post.objects.get(id=page)
+    # page = Post.objects.get(id=page)
     context = {
-        'page': page
+        'page': about
     }
 
     return render(request, 'pages/single.html', context)
+
+def about(request):
+    # page = Post.objects.get(id=page)
+    context = {
+        'page': about
+    }
+
+    return render(request, 'pages/about.html', context)
+
+def contact(request):
+    # page = Post.objects.get(id=page)
+    context = {
+        'page': contact
+    }
+
+    return render(request, 'pages/contact.html', context)
+
+def gallery(request):
+    # page = Post.objects.get(id=page)
+    context = {
+        'page': gallery
+    }
+
+    return render(request, 'pages/gallery.html', context)
+
+def portfolio(request):
+    # page = Post.objects.get(id=page)
+    context = {
+        'page': portfolio
+    }
+
+    return render(request, 'pages/portfolio.html', context)
+
+def services(request):
+    # page = Post.objects.get(id=page)
+    context = {
+        'page': services
+    }
+
+    return render(request, 'pages/services.html', context)
