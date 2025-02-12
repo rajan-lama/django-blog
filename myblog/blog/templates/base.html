@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Title -->
+    <title>{% block title %}Default Title{% endblock %}</title>
+
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" defer>
+    <!-- Bootstrap Css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" defer>
+    <!-- Font Awesome Css -->
+    <link href="{% static 'assets/css/font-awesome.min.css' %}"  rel="stylesheet" defer>
+    <!-- Magnific Popup Css -->
+    <link href="{% static 'assets/css/magnific-popup.css' %}"  rel="stylesheet" defer>
+    <!-- Owl Carousel Css -->
+    <link href="{% static 'assets/css/owl.carousel.css' %}"  rel="stylesheet" defer
+    <!-- Main Css -->
+    <link href="{% static 'assets/css/style.css' %}"  rel="stylesheet" defer>
+    <!-- Responsive Css -->
+    <link href="{% static 'assets/css/responsive.css' %}"  rel="stylesheet" defer>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- CTA Area End -->
+    {% include 'partials/menu.html' %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <!-- Footer Area Start -->
+    {% include 'partials/footer.html' %}
+
+    <!-- Main JS -->
+    <script src="{% static 'assets/js/jquery.min.js' %}" defer></script>
+    <!-- Popper JS -->
+    <script src="{% static 'assets/js/popper.min.js' %}" defer></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}" defer></script>
+    <!-- Owl Carousel JS -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}" defer></script>
+    <!-- Manific Popup JS -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}" defer></script>
+    <!-- Isotope JS -->
+    <script src="{% static 'assets/js/isotope.min.js' %}" defer></script>
+    <!-- Imageload JS -->
+    <script src="{% static 'assets/js/imageloaded.min.js' %}" defer></script>
+    <!-- Counter JS -->
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}" defer></script>
+    <!-- Waypoint JS -->
+    <script src="{% static 'assets/js/waypoint.min.js' %}" defer></script>
+    <!-- Main JS -->
+    <script src="{% static 'assets/js/main.js' %}" defer></script>
+    
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

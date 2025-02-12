@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<section class="breadcumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcumb">
+                    <h4>{{post.title}}</h4>
+                    <ul>
+                        <li><a href="/"></a>Home</li> / 
+                        <li>Single Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog-single pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <h2>{{post.title}}</h2>
+                <img src="{% static 'assets/img/blog/blog1.jpg' %}" alt="">
+                <p>{{post.content}}</p>
+                <div class="comments">
+                    <h4>leave a reply</h4>
+                    <form action="">
+                        <input type="text" placeholder="Name">
+                        <input type="text" placeholder="Email">
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Message"></textarea>
+                        <input type="submit" value="Send">
+                    </form>
+                </div>
+            </div>
+            <!-- Footer Area Start -->
+            {% include 'partials/sidebar.html' %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block extra_js %}
+{% endblock %}
