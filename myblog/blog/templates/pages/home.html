@@ -31,7 +31,7 @@
                <img src="assets/img/blog/blog1.jpg" alt="" />
                <div class="post-content">
                   <div class="post-title">
-                     <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
+                     <h4><a href="{% url 'single' post.id %}">{{post.title}}</a></h4>
                   </div>
                   <div class="pots-meta">
                      <ul>
@@ -40,7 +40,7 @@
                      </ul>
                   </div>
                   <p>{{post.content}}</p>
-                  <a href="/post/{{post.id}}" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
+                  <a href="{% url 'single' post.id %}" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
                </div>
             </div>
          </div>
@@ -208,6 +208,21 @@
                </div>
             </div>
          </div> -->
+      </div>
+      <div class="pagination">
+         {% if posts.has_previous %}
+            <a href="?page={{posts.previous_page_number}}"><</a> 
+         {% endif %} 
+         {% for i in posts.paginator.page_range %}  
+            {% if posts.number == i %} 
+               <a href="?page={{i}}" class="active">{{i}}</a> 
+            {% else %} 
+               <a href="?page={{i}}">{{i}}</a> 
+            {% endif %} 
+         {% endfor %} 
+         {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}">></a>
+         {% endif %}                     
       </div>
    </div>
 </section>

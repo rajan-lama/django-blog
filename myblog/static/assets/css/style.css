@@ -1718,3 +1718,9 @@ a.box-btn:hover i.fa {
 	border: 1px solid #ddd;
 	padding: 3px;
   }
+
+  .pagination a {
+    border: 1px solid #eeeeee;
+    margin-right: 5px;
+    padding: 0 5px;
+}

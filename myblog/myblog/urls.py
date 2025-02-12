@@ -28,7 +28,7 @@ urlpatterns = [
     path('gallery', blog_views.gallery),
     path('blog', blog_views.home),
     path('contact', blog_views.contact),
-    path('/<str:page>/', blog_views.page, name='page'),
+    path('<str:page>', blog_views.page, name='page'),
 
     path("", blog_views.frontpage),
     # path("", blog_views.home),

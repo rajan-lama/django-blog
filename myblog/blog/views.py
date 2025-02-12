@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from blog.models import Post
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -32,10 +32,18 @@ def frontpage(request):
 
 def home(request):
 
-    posts = Post.objects.all()
-    paginate = Paginator(posts, 5)
+    post_list = Post.objects.all()
+    paginate = Paginator(post_list, 6)
+    
     page = request.GET.get('page')
 
+    try:
+        posts = paginate.page(page)
+    except PageNotAnInteger:
+        posts = paginate.page(1)
+    except EmptyPage:
+        posts = paginate.page(paginate.num_pages)
+    
     context = {
         # 'currentUser': username,
         'posts': posts
