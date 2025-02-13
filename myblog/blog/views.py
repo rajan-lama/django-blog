@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from blog.models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.shortcuts import get_object_or_404, render
+# from .models import Article
 # Create your views here.
 
 
@@ -53,12 +54,18 @@ def home(request):
 
 
 
+def article_detail(request, slug):
+    article = get_object_or_404(Post, slug=slug)
+    context = {
+        'post': article
+    }
+    return render(request, 'pages/single.html', context)
+
 def single(request, single):
     single = Post.objects.get(id=single)
     context = {
         'post': single
     }
-
     return render(request, 'pages/single.html', context)
 
 def page(request, page):
