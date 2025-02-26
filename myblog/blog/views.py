@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from blog.models import Post
+from blog.models import Post, Category, Page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404, render
 # from .models import Article
@@ -17,27 +17,12 @@ def frontpage(request):
 
     return render(request, 'pages/front-page.html')
 
-
-# def home(request, username):
-
-#     posts = Post.objects.all()
-#     paginate = Paginator(posts, 5)
-#     page = request.GET.get('page')
-
-#     context = {
-#         'currentUser': username,
-#         'posts': posts
-#     }
-
-#     return render(request, 'pages/home.html', context)
-
 def home(request):
 
     post_list = Post.objects.all()
     paginate = Paginator(post_list, 6)
     
     page = request.GET.get('page')
-
     try:
         posts = paginate.page(page)
     except PageNotAnInteger:
@@ -47,12 +32,10 @@ def home(request):
     
     context = {
         # 'currentUser': username,
-        'posts': posts
+        'posts': posts,
     }
 
     return render(request, 'pages/home.html', context)
-
-
 
 def article_detail(request, slug):
     article = get_object_or_404(Post, slug=slug)
@@ -61,6 +44,13 @@ def article_detail(request, slug):
     }
     return render(request, 'pages/single.html', context)
 
+def page(request, single_page):
+    page = Page.objects.get(slug=single_page)
+    context = {
+        'page': page
+    }
+    return render(request, 'pages/page.html', context)
+
 def single(request, single):
     single = Post.objects.get(id=single)
     context = {
@@ -68,13 +58,30 @@ def single(request, single):
     }
     return render(request, 'pages/single.html', context)
 
-def page(request, page):
-    # page = Post.objects.get(id=page)
+def archive(request, category):
+    cat = Category.objects.get(slug=category)
+    post_list = Post.objects.filter(categories__pk=cat.id) # pk = primary key
+    paginate = Paginator(post_list, 6)
+    
+    page = request.GET.get('page')
+    categories = Category.get_all_categories()
+    # categories = request.GET.get('category')
+    try:
+        posts = paginate.page(page)
+
+    except PageNotAnInteger:
+        posts = paginate.page(1)
+    except EmptyPage:
+        posts = paginate.page(paginate.num_pages)
+    
     context = {
-        'page': about
+        # 'currentUser': username,
+        'posts': posts,
+        'categories': categories,
+        'title': cat.title
     }
 
-    return render(request, 'pages/single.html', context)
+    return render(request, 'pages/archive.html', context)
 
 def about(request):
     # page = Post.objects.get(id=page)

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{page.title}}{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<section class="breadcumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcumb">
+                    <h4>{{page.title}}</h4>
+                    <ul>
+                        <li><a href="/"></a>Home</li> / 
+                        <li>Single Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog-single pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <h2>{{page.title}}</h2>
+                <img src="{% static 'assets/img/blog/blog1.jpg' %}" alt="">
+                <p>{{page.content | safe}}</p>
+            </div>
+            <!-- Footer Area Start -->
+            {% include 'partials/sidebar.html' %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block extra_js %}
+{% endblock %}
