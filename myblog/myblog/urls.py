@@ -16,20 +16,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from blog import views as blog_views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import re_path
+from django.views.static import serve
+# from .views import article_detail
 
+from blog import views as blog_views
 urlpatterns = [
     path("admin/", admin.site.urls),
+    re_path(r'^images/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+
     # path('username/<str:username>/', blog_views.home, name='username'),
     path('post/<int:single>/', blog_views.single, name='single'),
-    path('about', blog_views.about),
+    path('post/<slug:slug>/', blog_views.article_detail, name='article_detail'),
+    path('category/<slug:category>/', blog_views.archive, name='category'),
+    # path('about', blog_views.about),
     path('services', blog_views.services),
     path('portfolio', blog_views.portfolio),
     path('gallery', blog_views.gallery),
     path('blog', blog_views.home),
     path('contact', blog_views.contact),
-    path('<str:page>', blog_views.page, name='page'),
+    # path('<str:single_page>', blog_views.page, name='single_page'),
 
     path("", blog_views.frontpage),
-    # path("", blog_views.home),
 ]
+if settings.DEBUG:  # Only for development
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
